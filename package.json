@@ -1,0 +1,11 @@
+{
+  "name": "shop_spider",
+  "version": "0.0.1",
+  "dependencies": {
+    "request": "~2.51.0",
+    "cheerio": "~0.18.0",
+    "promise": "~6.1.0",
+    "bufferhelper": "~0.2.0",
+    "iconv-lite": "~0.4.6"
+  }
+}
