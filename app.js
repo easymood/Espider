@@ -6,6 +6,20 @@ var BufferHelper = require('bufferhelper');
 var http = require('http');
 
 
+
+//抓取商品列表内容
+var casper = require('casper').create();
+
+casper.start('http://www.baidu.com/', function() {
+   this.echo(this.getTitle());
+});
+
+casper.run();
+
+
+
+
+
 http.get("http://www.amazon.com/senlips-light-bar-13-5inch-combo/dp/B00NYK0FNA/ref=aag_m_pw_dp?ie=UTF8&m=A1ZH4LPYESDYR6", function(res) {
     var bufferHelper = new BufferHelper();
 
