@@ -18,45 +18,11 @@ spider.thenOpen('http://www.amazon.com/gp/aag/main?ie=UTF8&asin=&isAmazonFulfill
 console.log("start finished");  
 //访问商品列表
 
+var getList=function(){
 
-var getALLlist=function(){
-spider.then(function getPlist() {  
-   console.log("start getPlist");  
-    productPlist = spider.evaluate(function getPlistFromPage() {  
-    	var list=document.querySelectorAll(".shoveler-content ul .aagImgLink"); 
-      var obj={
-        "list":[],
-        "next":""
-      };
-     for (var i=0;i<list.length;i++)
-     {
-      obj.list[i]=list[i].href
-      };
-
-     //翻页
-    // if (document.querySelector(".next-button-link").className.indexOf("disabled")>0){
-        //  console.log("click next");  
-          //document.querySelector(".next-button-link").click();
-          spider.click('.next-button-link');
-     //}else{
-      //console.log("pageer END");  
-      //spider.exit(); 
-    //}
-  
-      
-     return obj
-    }); 
-
-    console.log(productPlist.list.length);
-     for (var i=0;i<productPlist.list.length;i++)
-      {
-       console.log(productPlist.list[i]);
-      };
-
-  
-spider.wait(5000,function(){
-        this.echo('wait time over!');
-        productPlist2 = spider.evaluate(function getPlistFromPage() {  
+  spider.then(function(){
+        
+      productPlist2 = spider.evaluate(function getPlistFromPage() {  
       var list=document.querySelectorAll(".shoveler-content ul .aagImgLink"); 
       var obj={
         "list":[],
@@ -77,12 +43,33 @@ console.log(productPlist2.list.length);
        console.log(productPlist2.list[i]);
       };
 
+console.log("next page");
+spider.then(function(){spider.click('.next-button-link')});    
 
 }); 
-    //spider.exit(); 
+
+
+
+}
+
+
+
+
+var getALLlist=function(){
+spider.then(function getPlist() {  
+
+    getList();
+   console.log("start getPlist");  
+   //spider.then(function(){getList()});  
+
+   spider.wait(5000,function(){
+        spider.then(function(){getALLlist()});  
     });
 
- 
+    });
+
+
+
 
 }
 
