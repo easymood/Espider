@@ -32,8 +32,12 @@ var getList=function(){
      {
       obj.list[i]=list[i].href
       };
-  
-     obj.next= document.querySelectorAll(".next-button-link").length;
+      if (document.querySelectorAll('.next-button .disabled').length>0){
+        obj.next= 0;
+      }else{
+        obj.next=1;
+      }
+     
      return obj
     }); 
 
@@ -43,6 +47,7 @@ console.log(productPlist2.list.length);
        console.log(productPlist2.list[i]);
       };
 
+console.log(productPlist2.next);
 if (productPlist2.next>0){//如果存在翻页链接
 
   console.log("next page");
@@ -50,7 +55,7 @@ spider.then(function(){spider.click('.next-button-link')});
 }else{
   //spider.exit;
   console.log("exit");
-spider.exit; 
+spider.exit(); 
 }
  
 
